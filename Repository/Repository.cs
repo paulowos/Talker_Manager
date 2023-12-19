@@ -20,6 +20,12 @@ public class Repository : IRepository
         return result;
     }
 
+    public Talker? GetById(int id)
+    {
+        var result = _collection.AsQueryable().FirstOrDefault(t => t.Id == id);
+        return result;
+    }
+
     public async Task<Talker> Add(TalkerDTO talkerDTO)
     {
         var id = _collection.GetNextIdValue();

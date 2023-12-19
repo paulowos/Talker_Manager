@@ -22,8 +22,15 @@ public class TalkerController : ControllerBase
         return Ok(result);
     }
 
+    [HttpGet(":id")]
+    public ActionResult<Talker?> GetById(int id)
+    {
+        var result = _repository.GetById(id);
+        return result is null ? NotFound(new { message = "Pessoa palestrante não encontrada" }) : Ok(result);
+    }
+
     [HttpPost]
-    public async Task<ActionResult<Talker>> Add([FromBody] TalkerDTO talkerDTO)
+    public async Task<ActionResult<Talker>> Add(TalkerDTO talkerDTO)
     {
         var result = await _repository.Add(talkerDTO);
         return Created("", result);
