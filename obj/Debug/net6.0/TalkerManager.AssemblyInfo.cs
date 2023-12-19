@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TalkerManager")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+651dce954c7ec3fd03c3ba546b86586cfa26c5a5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+983d5d2b0c74754edf2f45232e6af9c5d5be6e64")]
 [assembly: System.Reflection.AssemblyProductAttribute("TalkerManager")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TalkerManager")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
