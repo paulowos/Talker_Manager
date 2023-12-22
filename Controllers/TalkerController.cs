@@ -1,3 +1,4 @@
+using System.Net.Http.Headers;
 using Microsoft.AspNetCore.Mvc;
 using TalkerManager.DTO;
 using TalkerManager.Model;
@@ -30,9 +31,10 @@ public class TalkerController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<Talker>> Add(TalkerDTO talkerDTO)
+    public async Task<ActionResult<Talker>> Add([FromHeader] string authorization, TalkerDTO talkerDTO)
     {
+        _ = AuthenticationHeaderValue.Parse(authorization);
         var result = await _repository.Add(talkerDTO);
-        return Created("", result);
+        return CreatedAtAction("GetById", result.Id, result);
     }
 }
