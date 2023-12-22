@@ -53,4 +53,13 @@ public class TalkerController : ControllerBase
             Talk = talkerDTO.Talk
         };
     }
+
+    [HttpDelete("{id:int}")]
+    public async Task<ActionResult> Delete([FromHeader]string authorization,[FromRoute] int id)
+    {
+        _ = AuthenticationHeaderValue.Parse(authorization);
+        var result = await _repository.Delete(id);
+        if (!result) return NotFound();
+        return NoContent();
+    }
 }

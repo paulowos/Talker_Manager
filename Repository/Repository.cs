@@ -45,4 +45,10 @@ public class Repository : IRepository
         var updated = await _collection.UpdateOneAsync(id, talkerDTO);
         return updated;
     }
+
+    public async Task<bool> Delete(int id)
+    {
+        var deleted = await _collection.DeleteOneAsync(id);
+        return deleted;
+    }
 }

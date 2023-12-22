@@ -8,4 +8,5 @@ public interface IRepository
     Talker? GetById(int id);
     Task<Talker> Add(TalkerDTO talkerDTO);
     Task<bool> Update(int id, TalkerDTO talkerDTO);
+    Task<bool> Delete(int id);
 }
