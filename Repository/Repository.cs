@@ -16,7 +16,7 @@ public class Repository : IRepository
 
     public IEnumerable<Talker> GetAll()
     {
-        var result = _collection.AsQueryable().Where(t => true);
+        var result = _collection.AsQueryable().Where(_ => true);
         return result;
     }
 
@@ -50,5 +50,13 @@ public class Repository : IRepository
     {
         var deleted = await _collection.DeleteOneAsync(id);
         return deleted;
+    }
+
+    public IEnumerable<Talker> GetByQuery(string q, int? rate, DateTime? date)
+    {
+        var result = _collection.AsQueryable().Where(t => t.Name!.ToUpper().Contains(q.ToUpper()));
+        if (rate is not null) result = result.Where(t => t.Talk!.Rate == rate);
+        if (date is not null) result = result.Where(t => t.Talk!.WatchedAt.Equals(date));
+        return result;
     }
 }

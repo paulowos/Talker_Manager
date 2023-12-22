@@ -30,6 +30,15 @@ public class TalkerController : ControllerBase
         return result is null ? NotFound(new { message = "Pessoa palestrante não encontrada" }) : Ok(result);
     }
 
+    [HttpGet("search")]
+    public ActionResult<Talker[]> GetByQuery([FromHeader] string authorization, string? q = "", int? rate = null,
+        DateTime? date = null)
+    {
+        _ = AuthenticationHeaderValue.Parse(authorization);
+        var result = _repository.GetByQuery(q, rate, date);
+        return Ok(result);
+    }
+
     [HttpPost]
     public async Task<ActionResult<Talker>> Add([FromHeader] string authorization, TalkerDTO talkerDTO)
     {
@@ -55,7 +64,7 @@ public class TalkerController : ControllerBase
     }
 
     [HttpDelete("{id:int}")]
-    public async Task<ActionResult> Delete([FromHeader]string authorization,[FromRoute] int id)
+    public async Task<ActionResult> Delete([FromHeader] string authorization, [FromRoute] int id)
     {
         _ = AuthenticationHeaderValue.Parse(authorization);
         var result = await _repository.Delete(id);
