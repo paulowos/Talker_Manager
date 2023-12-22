@@ -39,4 +39,10 @@ public class Repository : IRepository
         await _collection.InsertOneAsync(talker);
         return talker;
     }
+
+    public async Task<bool> Update(int id, TalkerDTO talkerDTO)
+    {
+        var updated = await _collection.UpdateOneAsync(id, talkerDTO);
+        return updated;
+    }
 }

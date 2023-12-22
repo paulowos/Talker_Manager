@@ -23,7 +23,7 @@ public class TalkerController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet(":id")]
+    [HttpGet("{id:int}")]
     public ActionResult<Talker?> GetById(int id)
     {
         var result = _repository.GetById(id);
@@ -35,6 +35,22 @@ public class TalkerController : ControllerBase
     {
         _ = AuthenticationHeaderValue.Parse(authorization);
         var result = await _repository.Add(talkerDTO);
-        return CreatedAtAction("GetById", result.Id, result);
+        return Created("", result);
+    }
+
+    [HttpPut("{id:int}")]
+    public async Task<ActionResult<Talker?>> UpdateById([FromHeader] string authorization, [FromRoute] int id,
+        [FromBody] TalkerDTO talkerDTO)
+    {
+        _ = AuthenticationHeaderValue.Parse(authorization);
+        var result = await _repository.Update(id, talkerDTO);
+        if (!result) return NotFound(new { message = "Id not found" });
+        return new Talker
+        {
+            Id = id,
+            Name = talkerDTO.Name,
+            Age = talkerDTO.Age,
+            Talk = talkerDTO.Talk
+        };
     }
 }
