@@ -1,7 +1,10 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace TalkerManager.Model;
 
 public class Talk
 {
-    public DateTime WatchedAt { get; set; }
-    public int Rate { get; set; }
+    [Required] [DataType(DataType.Date)] public DateTime WatchedAt { get; set; }
+
+    [Required] [Range(0, 5)] public int Rate { get; set; }
 }
